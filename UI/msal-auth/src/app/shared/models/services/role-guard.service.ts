@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { AccountInfo } from '@azure/msal-browser';
 
-interface Account extends AccountInfo {
+export interface Account extends AccountInfo {
   idTokenClaims?: {
     roles?: string[]
   }

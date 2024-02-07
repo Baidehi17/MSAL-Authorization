@@ -3,10 +3,10 @@ import { ICandidate } from 'src/app/shared/models/candidate/candidate';
 import { CandidateService } from 'src/app/modules/candidate/core/candidate.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CandidateFormComponent } from '../candidate-form/candidate-form.component';
-import { Header } from 'primeng/api';
 import { Headers } from 'src/app/shared/constant/constants';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { MsalService } from '@azure/msal-angular';
+import { Account } from 'src/app/shared/models/services/role-guard.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,13 +19,16 @@ export class HomeComponent implements OnInit {
   candidates: ICandidate[] = [];
   ref: DynamicDialogRef | undefined;
   header: string = "";
-
+  role: string | undefined = "";
+  
   constructor(private candidateservice: CandidateService, public dialogService: DialogService, private http: HttpClient, private authService: MsalService) { }
 
   ngOnInit(): void {
     this.candidateservice.getCandidates().subscribe(res => {
       this.candidates = res;
     })
+    let role = this.authService.instance.getAllAccounts()[0].idTokenClaims?.roles;
+    this.role = String(role);
   }
 
   candidateForm(candidate: ICandidate | null) {

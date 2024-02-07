@@ -9,7 +9,7 @@
                 <th>Email</th>
                 <th>Age</th>
                 <th>Location</th>
-                <th>Action</th>
+                <th *ngIf="role=='candidate.ReadWrite'">Action</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-candidate>
@@ -18,7 +18,7 @@
                 <td>{{ candidate.email }}</td>
                 <td>{{ candidate.age }}</td>
                 <td>{{candidate.location}}</td>
-                <td> 
+                <td *ngIf="role=='candidate.ReadWrite'">
                     <i class="pi pi-user-edit action" (click)="candidateForm(candidate)"></i>
                     <i class="pi pi-trash ms-4 action" (click)="deleteCandidate(candidate)"></i>
                 </td>
