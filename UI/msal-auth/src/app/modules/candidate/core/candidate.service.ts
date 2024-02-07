@@ -27,7 +27,7 @@ export class CandidateService {
     }
 
     deleteCandidate(id: number) {
-        return this.http.delete(this.url + '/' + id);
+        return this.http.delete(this.url + '?id=' + id);
     }
 
     editCandidate(candidate: ICandidate) {

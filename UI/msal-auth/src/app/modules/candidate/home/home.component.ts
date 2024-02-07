@@ -5,7 +5,8 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CandidateFormComponent } from '../candidate-form/candidate-form.component';
 import { Header } from 'primeng/api';
 import { Headers } from 'src/app/shared/constant/constants';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MsalService } from '@azure/msal-angular';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
   header: string = "";
 
-  constructor(private candidateservice: CandidateService, public dialogService: DialogService) { }
+  constructor(private candidateservice: CandidateService, public dialogService: DialogService, private http: HttpClient, private authService: MsalService) { }
 
   ngOnInit(): void {
     this.candidateservice.getCandidates().subscribe(res => {
@@ -27,20 +28,26 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  candidateForm(candidate: ICandidate | null) {    
+  candidateForm(candidate: ICandidate | null) {
     this.ref = this.dialogService.open(CandidateFormComponent, {
       data: {
-        candidate:candidate,
-        close:this.closeForm.bind(this),
+        candidate: candidate,
+        close: this.closeForm.bind(this),
       },
       header: candidate == null ? Headers.AddCandidate : Headers.EditCandidate
     })
   }
 
-  closeForm(){
+  closeForm() {
     this.ref?.close();
     this.ngOnInit();
   }
 
-  deleteCandidate() { }
+  deleteCandidate(candidate: ICandidate) {
+    if (candidate.id != null) {
+      this.candidateservice.deleteCandidate(candidate.id).subscribe(res => {
+      });
+    }
+  }
+
 }
