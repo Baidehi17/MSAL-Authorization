@@ -1,0 +1,18 @@
+.candidate-form {
+    ::ng-deep {
+        .app-btn {
+            .p-button {
+                border-radius: 4px;
+                padding: 0.3rem 1rem;
+            }
+    
+            .p-button-label {
+                font-weight: 500;
+            }
+        }
+        .p-inputtext{
+            width: 26rem;
+            height: 2.5rem;        
+        }
+    }
+}

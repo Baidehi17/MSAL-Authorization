@@ -1,0 +1,32 @@
+<div class="candidate-form">
+    <form [formGroup]="candidateForm">
+        <div class="candidateForm mb-3">
+            <label for="name">Name</label>
+            <div class="input-field">
+                <input type="text" pInputText formControlName="name"/>
+            </div>
+        </div>
+        <div class="candidateForm mb-3">
+            <label for="name">Age</label>
+            <div class="input-field">
+                <input type="text" pInputText formControlName="age"/>
+            </div>
+        </div>
+        <div class="candidateForm mb-3">
+            <label for="name">Email</label>
+            <div class="input-field">
+                <input type="text" pInputText formControlName="email"/>
+            </div>
+        </div>
+        <div class="candidateForm mb-3">
+            <label for="name">Location</label>
+            <div class="input-field">
+                <input type="text" pInputText formControlName="location"/>
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer justify-content-end p-3">
+        <p-button label="Cancel" styleClass="p-button-outlined" (click)="closeForm()" class="me-2 app-btn"></p-button>
+        <p-button label="Save" (click)="saveForm()" class="app-btn"></p-button>
+    </div>
+</div>

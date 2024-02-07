@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-between m-2">
+    <div class="text-uppercase fs-4 fw-bold">
+        msal
+    </div>
+    <div>
+        <p-button class="me-2 app-btn" routerLink="/customers">Customers</p-button>
+        <p-button class="me-2 app-btn" routerLink="/candidates">Candidate</p-button>
+        <p-button class="me-2 app-btn" *ngIf="!loginDisplay()" (click)="login()">signIn </p-button>
+        <p-button class="me-2 app-btn" *ngIf="loginDisplay()" (click)="logout()">sign out</p-button>
+    </div>
+</div>
+<router-outlet></router-outlet>
